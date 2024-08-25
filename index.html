@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutton Price Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('https://i.postimg.cc/VNLZ5NvH/Goatimage.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #e0e0e0;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            padding: 30px;
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin: 20px;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 1.8em;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            color: white;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            font-size: 0.9em;
+        }
+
+        .input-group {
+            position: relative;
+            margin-top: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #ffffff;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(75, 132, 204, 0.5)
+        }
+
+        button {
+            background: #47a2c9;
+            color: #333;
+            border: none;
+            padding: 12px 24px;
+            margin-top: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        button:hover {
+            background: #47a2c9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px #47a2c9;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #ffd700;
+            opacity: 0;
+            transition: all 0.5s ease;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            font-size: 0.9em;
+        }
+
+        .show-result {
+            opacity: 1 !important;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 40px;
+                max-width: 380px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            label {
+                font-size: 1em;
+            }
+
+            input {
+                font-size: 16px;
+                padding: 12px;
+            }
+
+            button {
+                font-size: 18px;
+                padding: 14px 28px;
+            }
+
+            #result {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container fade-in">
+        <h1>Mutton Price Calculator</h1>
+        <div class="input-group">
+            <label for="price">Price per kg (in Rs):</label>
+            <input type="number" id="price" value="700">
+        </div>
+        <div class="input-group">
+            <label for="people">Number of people:</label>
+            <input type="number" id="people" value="7">
+        </div>
+        <div class="input-group">
+            <label for="pieces">Pieces per person:</label>
+            <input type="number" id="pieces" value="5">
+        </div>
+        <button onclick="calculatePrice()">Calculate</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculatePrice() {
+            const pricePerKg = parseFloat(document.getElementById('price').value);
+            const numberOfPeople = parseInt(document.getElementById('people').value);
+            const piecesPerPerson = parseInt(document.getElementById('pieces').value);
+
+            const totalPieces = numberOfPeople * piecesPerPerson;
+            const totalKg = totalPieces / 70;
+            const totalPrice = totalKg * pricePerKg;
+
+            const result = document.getElementById('result');
+            result.innerHTML = `Estimated total price: Rs ${totalPrice.toFixed(2)}<br>
+                                Total weight: ${totalKg.toFixed(2)} kg<br>
+                                Total pieces: ${totalPieces}`;
+            result.classList.add('show-result');
+        }
+    </script>
+</body>
+</html>
